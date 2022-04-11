@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(struct_c
         main.c
+        main.h
         stack.h)
