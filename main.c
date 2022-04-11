@@ -1,12 +1,40 @@
 #include <stdio.h>
 #include "stack.h"
+#include "stdarg.h"
 int main();
 void sample();
+
+#define SAMPLE_STACK(typename, type, ...) \
+    CREATE_STACK(stackName, type); \
+\
+{ \
+    void RunSample(__VA_ARGS__){ \
+        stackName* stack = stackName##Start(10); \
+        va_list elements; \
+        va_start(elements, __VA_ARGS__); \
+        int i; \
+        for (i = __VA_ARGS__; i != NULL; i = va_arg(elements, type)) \
+        { \
+            stackName##Push(stack, i); \
+        } \
+\
+        printf("Stack Content: \n"); \
+        while (!stackName##IsEmpty(stack)) \
+        { \
+            printf("- %d - ", stackName##Pop(stack)); \
+        } \
+        printf("\n"); \
+        stackName##Delete(stack); \
+    } \
+    RunSample(); \
+}
 
 
 int main()
 {
-    sample();
+    SAMPLE_STACK(IntStack, int, 1, 2, 3, 4, 5, NULL);
+    // If you wanna see the other way to sample it, just uncomment this call.
+    //sample();
     return 0;
 }
 
@@ -70,5 +98,3 @@ void sample()
     }
 
 }
-
-
