@@ -12,9 +12,9 @@ struct Stack
 };
 
 struct Stack* Start();
-int IsFull(struct Stack* stack);
-int IsEmpty(struct Stack* stack);
-int Size(struct Stack* stack);
+inline int IsFull(struct Stack* stack);
+inline int IsEmpty(struct Stack* stack);
+inline int Size(struct Stack* stack);
 inline TYPE Peek(struct Stack* stack);
 inline TYPE Pop(struct Stack* stack);
 inline void Push(struct Stack* stack, TYPE element);
